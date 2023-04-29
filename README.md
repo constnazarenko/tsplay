@@ -1,0 +1,2 @@
+# tsplay
+Playground for TypeScript
