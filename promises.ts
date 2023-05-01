@@ -7,8 +7,6 @@ setTimeout(() => console.log(6));
 console.log(7);
 
 
-
-
 function promiseAll(...promises) {
     return new Promise((resolve, reject) => {
       let counter = promises.length;
@@ -37,3 +35,27 @@ function promiseAll(...promises) {
   console.log(promiseAll(promise1, promise2));
 
   console.log(promiseAll(promise1, promise2));
+
+
+
+
+class CustomPromise {
+    thenFnc: Function;
+
+	constructor(callback) {
+        callback(this.resolve);
+    }
+ 
+	resolve = () => this.thenFnc();
+
+	then = (fnc) => this.thenFnc = fnc;
+}
+
+const promise = new CustomPromise((resolve) => {
+	setTimeout(() => {
+		resolve();
+  }, 2000);
+});
+
+
+promise.then(() => console.log('2 seconds passed'));
